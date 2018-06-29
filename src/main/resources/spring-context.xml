@@ -7,11 +7,11 @@
     <bean id="personDao" class="ru.sergey_gusarov.hw1.dao.PersonDaoSimple">
     </bean>
 
-    <bean id="personService" class="ru.sergey_gusarov.hw1.service.PersonServiceImpl">
+    <bean id="personService" class="ru.sergey_gusarov.hw1.service.user.PersonServiceImpl">
         <property name="dao" ref="personDao"/>
     </bean>
 
-    <bean id="loginService" class="ru.sergey_gusarov.hw1.service.login.LoginServiceImplPrompt">
+    <bean id="loginService" class="ru.sergey_gusarov.hw1.service.user.login.LoginServiceImplShell">
         <property name="personService" ref="personService"/>
     </bean>
 
@@ -25,6 +25,9 @@
 
     <bean id="testingService"
           class="ru.sergey_gusarov.hw1.service.testing.TestingServiceImplFile">
+    </bean>
+
+    <bean id="ShowResultsService" class="ru.sergey_gusarov.hw1.service.testing.results.ShowResultsServiceImplShell">
     </bean>
 
 </beans>

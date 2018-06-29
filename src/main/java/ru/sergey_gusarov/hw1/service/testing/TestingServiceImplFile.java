@@ -1,10 +1,11 @@
 package ru.sergey_gusarov.hw1.service.testing;
 
 import ru.sergey_gusarov.hw1.domain.Answer;
-import ru.sergey_gusarov.hw1.domain.IntervieweeResult;
 import ru.sergey_gusarov.hw1.domain.Question;
+import ru.sergey_gusarov.hw1.domain.results.IntervieweeResultBase;
+import ru.sergey_gusarov.hw1.domain.results.IntervieweeResultSimple;
 import ru.sergey_gusarov.hw1.domain.testing.DataForTestingUtil;
-import ru.sergey_gusarov.hw1.domain.testing.DataForTestingUtilPrompt;
+import ru.sergey_gusarov.hw1.domain.testing.DataForTestingUtilShell;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
 
 import java.util.ArrayList;
@@ -17,55 +18,39 @@ public class TestingServiceImplFile implements TestingService {
     private final String HOW_TYPE_ANSWER = "Введите номер ответа. Если несколько, то через запятую, например 2,3 : ";
 
     @Override
-    public IntervieweeResult startTest(DataForTestingUtil dataForTesting) throws BizLogicException {
-        if (!(dataForTesting instanceof DataForTestingUtilPrompt))
+    public IntervieweeResultBase startTest(DataForTestingUtil dataForTesting) throws BizLogicException {
+        if (!(dataForTesting instanceof DataForTestingUtilShell))
             throw new BizLogicException("Неверный тип данных для начала теста");
-        IntervieweeResult intervieweeResult = new IntervieweeResult(dataForTesting.getPerson());
+        IntervieweeResultBase intervieweeResultBase = new IntervieweeResultSimple(dataForTesting.getPerson());
         Integer countQuestion;
         List<Question> intervieweeQuestions = new ArrayList<Question>();
         countQuestion = dataForTesting.getQuestion().size();
-        Scanner inScanner = new Scanner(((DataForTestingUtilPrompt) dataForTesting).getInputStream());
+
+        Scanner inScanner = new Scanner(((DataForTestingUtilShell) dataForTesting).getInputStream());
         System.out.println("Начинаем тестирование. Всего вопросов: " + countQuestion.toString());
-        for (int i = 0; i < countQuestion; i++) {
-            try {
+        try {
+            for (int i = 0; i < countQuestion; i++) {
                 Question question = dataForTesting.getQuestion().get(i);
                 printQuestionAndAnswers(question);
-                String answerStr = getPromtAnswer(inScanner);
+                String answerStr = getShellAnswer(inScanner);
                 Question intervieweeQuestion = getParseAnswerAndSetQuestion(question, answerStr);
                 intervieweeQuestions.add(intervieweeQuestion);
-            } catch (BizLogicException ex) {
-                ex.printStackTrace();
-                ex.printMessage();
-                throw new BizLogicException("Ошибка в логике провередении тестирования.");
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                throw new BizLogicException("Серёзная ошибка при провередении тестирования.");
             }
+        } catch (BizLogicException ex) {
+            ex.printStackTrace();
+            ex.printMessage();
+            throw new BizLogicException("Ошибка в логике провередении тестирования.");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new BizLogicException("Серёзная ошибка при провередении тестирования.");
         }
-        intervieweeResult.setQuestions(intervieweeQuestions);
-
-        printResult(intervieweeResult);
-        return intervieweeResult;
-    }
-
-    public void printResult(IntervieweeResult intervieweeResult) {
-        if (intervieweeResult != null) {
-            StringBuilder sb = new StringBuilder(120);
-            sb.append("Результаты:\n");
-            sb.append("Пользователь: ").append(intervieweeResult.getPerson().getFullName());
-            if (intervieweeResult.isTestPass())
-                sb.append("\nТест пройден!\n");
-            else
-                sb.append("\nТест не пройден.\n");
-            sb.append("\nНабранные баллы: ").append(intervieweeResult.getSumScore());
-            System.out.println(sb.toString());
-        } else
-            System.out.println("Не указан пользователь или по нему нет данных");
+        intervieweeResultBase.setQuestions(intervieweeQuestions);
+        return intervieweeResultBase;
     }
 
 
-    private String getPromtAnswer(Scanner scanner) {
-        System.out.print(HOW_TYPE_ANSWER);
+    private String getShellAnswer(Scanner scanner) {
+        System.out.println(HOW_TYPE_ANSWER);
         return scanner.nextLine();
     }
 

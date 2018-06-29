@@ -18,13 +18,12 @@ public class ReadQuestionFileServiceImplCsv implements ReadQuestionFileService {
     final private int COUNT_QUESTION_IN_FILE = 5;
 
     @Override
-    public List<Question> loadFile(String fileName) throws FileNotFoundException, IOException {
+    public List<Question> loadFile(String fileName) throws IOException {
         List<Question> questionList = new ArrayList<Question>();
-
-        Reader in = null;
+        Reader inCsvFile;
         try {
-            in = new FileReader(fileName);
-            Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader().parse(in);
+            inCsvFile = new FileReader(fileName);
+            Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader().parse(inCsvFile);
             Integer countQuestions = QUESTION_START_NUM;
             for (CSVRecord record : records) {
                 List<Answer> answers = new ArrayList<Answer>();

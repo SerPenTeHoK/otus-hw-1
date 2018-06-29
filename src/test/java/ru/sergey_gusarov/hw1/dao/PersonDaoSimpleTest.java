@@ -58,4 +58,6 @@ class PersonDaoSimpleTest {
         assertEquals("Surname2", secondPerson.getSurname());
         assertFalse(secondPerson.equals(firstPerson));
     }
+
+
 }

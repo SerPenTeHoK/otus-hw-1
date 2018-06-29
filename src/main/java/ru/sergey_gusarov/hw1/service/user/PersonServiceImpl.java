@@ -1,4 +1,4 @@
-package ru.sergey_gusarov.hw1.service;
+package ru.sergey_gusarov.hw1.service.user;
 
 import ru.sergey_gusarov.hw1.dao.PersonDao;
 import ru.sergey_gusarov.hw1.domain.Person;
@@ -11,7 +11,7 @@ public class PersonServiceImpl implements PersonService {
         this.dao = dao;
     }
 
-    public Person getByName(String name, String surname) throws BizLogicException {
+    public Person getByNameAndSurname(String name, String surname) throws BizLogicException {
         return dao.findByNameAndSurname(name, surname);
     }
 }

@@ -8,5 +8,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ReadQuestionFileService {
-    List<Question> loadFile(String fileName) throws FileNotFoundException, IOException;
+    List<Question> loadFile(String fileName) throws IOException;
 }
