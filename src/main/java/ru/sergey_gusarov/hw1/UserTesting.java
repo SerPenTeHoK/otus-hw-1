@@ -17,15 +17,17 @@ import java.util.Properties;
 
 
 public class UserTesting {
-
-    public static void main(String[] args) {
-        Properties properties = new Properties();
+    public static Properties properties = new Properties();
+    static {
         try {
             properties.load(new FileInputStream("src/main/resources/app.property"));
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
+    }
+
+    public static void main(String[] args) {
+
         String csvFileForTest = properties.getProperty("testing.question.file");
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
