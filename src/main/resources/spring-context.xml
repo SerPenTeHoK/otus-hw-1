@@ -7,12 +7,13 @@
     <bean id="personDao" class="ru.sergey_gusarov.hw1.dao.PersonDaoSimple">
     </bean>
 
+    <!-- Для тренировки-->
     <bean id="personService" class="ru.sergey_gusarov.hw1.service.user.PersonServiceImpl">
         <property name="dao" ref="personDao"/>
     </bean>
 
     <bean id="loginService" class="ru.sergey_gusarov.hw1.service.user.login.LoginServiceImplShell">
-        <property name="personService" ref="personService"/>
+        <constructor-arg index="0" ref="personService"/>
     </bean>
 
     <bean id="readQuestionFileService"
@@ -20,14 +21,14 @@
     </bean>
 
     <bean id="questionDaoFileSource" class="ru.sergey_gusarov.hw1.dao.QuestionDaoFileSource">
-        <property name="readQuestionFileService" ref="readQuestionFileService"/>
+        <constructor-arg index="0" ref="readQuestionFileService"/>
     </bean>
 
     <bean id="testingService"
           class="ru.sergey_gusarov.hw1.service.testing.TestingServiceImplFile">
     </bean>
 
-    <bean id="ShowResultsService" class="ru.sergey_gusarov.hw1.service.testing.results.ShowResultsServiceImplShell">
+    <bean id="showResultsService" class="ru.sergey_gusarov.hw1.service.testing.results.ShowResultsServiceImplShell">
     </bean>
 
 </beans>

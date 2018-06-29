@@ -7,10 +7,9 @@ import ru.sergey_gusarov.hw1.util.ResultCheckHelper;
 public class ShowResultsServiceImplShell implements ShowResutlsService {
 
     @Override
-    public void showTestingResult(IntervieweeResultBase intervieweeResult) {
+    public void showTestingResult(IntervieweeResultBase intervieweeResult) throws BizLogicException {
         if (intervieweeResult == null) {
-            System.out.println("Не указан пользователь или по нему нет данных");
-            return;
+            throw new BizLogicException("Не указан пользователь или по нему нет данных");
         }
         boolean isTestPass;
         Integer sum;
@@ -18,20 +17,17 @@ public class ShowResultsServiceImplShell implements ShowResutlsService {
             isTestPass = ResultCheckHelper.isTestPass(intervieweeResult.getQuestions());
             sum = ResultCheckHelper.getSumScore(intervieweeResult.getQuestions());
         } catch (BizLogicException ex) {
-            ex.printMessage();
-            return;
+            throw ex;
         }
 
-        StringBuilder sb = new StringBuilder(120);
+        StringBuilder sb = new StringBuilder(140);
         sb.append("Результаты:\n");
         sb.append("Пользователь: ").append(intervieweeResult.getPerson().getFullName());
         if (isTestPass)
-            sb.append("\nТест пройден!\n");
+            sb.append("\nТест пройден! Поздравлем!\n");
         else
-            sb.append("\nТест не пройден.\n");
+            sb.append("\nТест вами не пройден. Поробуйте в следующий раз.\n");
         sb.append("\nНабранные баллы: ").append(sum);
         System.out.println(sb.toString());
-
-
     }
 }

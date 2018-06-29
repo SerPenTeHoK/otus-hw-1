@@ -5,11 +5,10 @@ import ru.sergey_gusarov.hw1.dao.QuestionDao;
 import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.domain.Question;
 import ru.sergey_gusarov.hw1.domain.results.IntervieweeResultBase;
-import ru.sergey_gusarov.hw1.domain.testing.DataForTestingUtilShell;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
+import ru.sergey_gusarov.hw1.service.testing.TestingService;
 import ru.sergey_gusarov.hw1.service.testing.results.ShowResutlsService;
 import ru.sergey_gusarov.hw1.service.user.login.LoginService;
-import ru.sergey_gusarov.hw1.service.testing.TestingService;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,20 +23,18 @@ public class UserTesting {
         TestingService testingService = context.getBean(TestingService.class);
         ShowResutlsService showResutlsService = context.getBean(ShowResutlsService.class);
 
-        List<Question> questions = null;
-        Person interviewee;
-        IntervieweeResultBase intervieweeResult;
         try {
-            questions = questionDao.getQuestions();
-            interviewee = loginService.getUser(System.in);
-            DataForTestingUtilShell dsShell = new DataForTestingUtilShell(questions, interviewee, System.in);
-            intervieweeResult = testingService.startTest(dsShell);
+            List<Question> questions = questionDao.getAllQuestions();
+            Person interviewee = loginService.getUser();
+            IntervieweeResultBase intervieweeResult = testingService.startTest(questions, interviewee);
             showResutlsService.showTestingResult(intervieweeResult);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (BizLogicException e) {
-            e.printStackTrace();
-            e.printMessage();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.err.println("\nТестирование перервано обратитесь к разработчику, скопировав все текст ошибки");
+            return;
+        } catch (BizLogicException ex) {
+            ex.printStackTrace();
+            ex.printMessage();
             return;
         }
 

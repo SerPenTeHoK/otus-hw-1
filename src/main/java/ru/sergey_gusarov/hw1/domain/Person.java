@@ -26,8 +26,7 @@ public class Person {
         this.surname = surname;
     }
 
-    public String getFullName()
-    {
+    public String getFullName() {
         return name + " " + surname;
     }
 }

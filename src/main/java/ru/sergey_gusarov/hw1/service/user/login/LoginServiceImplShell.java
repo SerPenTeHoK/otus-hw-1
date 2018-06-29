@@ -5,20 +5,26 @@ import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
 import ru.sergey_gusarov.hw1.service.user.PersonService;
 
-
 import java.io.InputStream;
 import java.util.Scanner;
 
 @Service
 public class LoginServiceImplShell implements LoginService {
-    PersonService personService;
+    private final PersonService personService;
+    private InputStream inputStream = System.in;
 
-    public void setPersonService(PersonService personService) {
+    public LoginServiceImplShell(PersonService personService) {
         this.personService = personService;
     }
 
+    public void setInputStream(InputStream inputStream) throws BizLogicException {
+        if (inputStream == null)
+            throw new BizLogicException("Передан пустоей поток!");
+        this.inputStream = inputStream;
+    }
+
     @Override
-    public Person getUser(InputStream inputStream) throws BizLogicException {
+    public Person getUser() throws BizLogicException {
         String name;
         String surname;
 

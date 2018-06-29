@@ -1,48 +1,52 @@
 package ru.sergey_gusarov.hw1.service.testing;
 
 import ru.sergey_gusarov.hw1.domain.Answer;
+import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.domain.Question;
 import ru.sergey_gusarov.hw1.domain.results.IntervieweeResultBase;
 import ru.sergey_gusarov.hw1.domain.results.IntervieweeResultSimple;
-import ru.sergey_gusarov.hw1.domain.testing.DataForTestingUtil;
-import ru.sergey_gusarov.hw1.domain.testing.DataForTestingUtilShell;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class TestingServiceImplFile implements TestingService {
-
     private final String ANSWER_SEPARATOR_SYMBOL = ",";
-    private final String HOW_TYPE_ANSWER = "Введите номер ответа. Если несколько, то через запятую, например 2,3 : ";
+    private final String HOW_TYPE_ANSWER = "Введите номер ответа. Если несколько, то через запятую, например, 2,3 : ";
+
+    private InputStream inputStream = System.in;
+
+    public void setInputStream(InputStream inputStream) throws BizLogicException {
+        if (inputStream == null)
+            throw new BizLogicException("Передан пустоей поток!");
+        this.inputStream = inputStream;
+    }
 
     @Override
-    public IntervieweeResultBase startTest(DataForTestingUtil dataForTesting) throws BizLogicException {
-        if (!(dataForTesting instanceof DataForTestingUtilShell))
-            throw new BizLogicException("Неверный тип данных для начала теста");
-        IntervieweeResultBase intervieweeResultBase = new IntervieweeResultSimple(dataForTesting.getPerson());
+    public IntervieweeResultBase startTest(List<Question> questions, Person interviewee) throws BizLogicException {
+
+        IntervieweeResultBase intervieweeResultBase = new IntervieweeResultSimple(interviewee);
         Integer countQuestion;
         List<Question> intervieweeQuestions = new ArrayList<Question>();
-        countQuestion = dataForTesting.getQuestion().size();
+        countQuestion = questions.size();
 
-        Scanner inScanner = new Scanner(((DataForTestingUtilShell) dataForTesting).getInputStream());
+        Scanner inScanner = new Scanner(inputStream);
         System.out.println("Начинаем тестирование. Всего вопросов: " + countQuestion.toString());
         try {
             for (int i = 0; i < countQuestion; i++) {
-                Question question = dataForTesting.getQuestion().get(i);
+                Question question = questions.get(i);
                 printQuestionAndAnswers(question);
                 String answerStr = getShellAnswer(inScanner);
                 Question intervieweeQuestion = getParseAnswerAndSetQuestion(question, answerStr);
                 intervieweeQuestions.add(intervieweeQuestion);
             }
         } catch (BizLogicException ex) {
-            ex.printStackTrace();
-            ex.printMessage();
-            throw new BizLogicException("Ошибка в логике провередении тестирования.");
+            throw ex;
         } catch (Exception ex) {
             ex.printStackTrace();
-            throw new BizLogicException("Серёзная ошибка при провередении тестирования.");
+            throw new BizLogicException("Серёзная ошибка при провередении тестирования.", ex);
         }
         intervieweeResultBase.setQuestions(intervieweeQuestions);
         return intervieweeResultBase;
@@ -79,10 +83,15 @@ public class TestingServiceImplFile implements TestingService {
             ex.printStackTrace();
             throw new BizLogicException("Не удалось распознать, что вы ввели.");
         }
+        catch (IndexOutOfBoundsException ex){
+            ex.printStackTrace();
+            throw new BizLogicException("Вы ввели значение выходящее за диапазон возможных ответов.");
+        }
         return new Question(question.getId(), question.getCheckScore(), resultAnswers);
     }
 
-    private void setIntervieweeAnswers(Question question, List<Answer> resultAnswers, String strToPacer) throws NumberFormatException {
+    private void setIntervieweeAnswers(Question question, List<Answer> resultAnswers, String strToPacer) throws IndexOutOfBoundsException, NumberFormatException {
+        strToPacer = strToPacer.trim();
         Integer answerNum = Integer.valueOf(strToPacer) - 1;
         Answer resultAnswer = new Answer(question.getAnswers().get(answerNum).getAnswerText(),
                 question.getAnswers().get(answerNum).getScore());

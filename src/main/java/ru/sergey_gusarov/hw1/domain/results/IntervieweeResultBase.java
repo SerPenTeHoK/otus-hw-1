@@ -1,6 +1,5 @@
 package ru.sergey_gusarov.hw1.domain.results;
 
-import ru.sergey_gusarov.hw1.domain.Answer;
 import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.domain.Question;
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ResultCheckHelper {
     public static Integer getSumScore(List<Question> questions) throws BizLogicException {
-        if(questions == null)
+        if (questions == null)
             throw new BizLogicException("Переданы пустые вопросы, нет возможности посчитать сумму");
         Integer sumScore = 0;
         for (Question question : questions) {
@@ -20,7 +20,7 @@ public class ResultCheckHelper {
     }
 
     public static boolean isTestPass(List<Question> questions) throws BizLogicException {
-        if(questions == null)
+        if (questions == null)
             throw new BizLogicException("Переданы пустые вопросы, нет возможности определить пройден ли тест");
         for (Question question : questions) {
             Integer answerScore = 0;

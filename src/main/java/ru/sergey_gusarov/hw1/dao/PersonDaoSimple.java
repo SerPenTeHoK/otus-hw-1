@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class PersonDaoSimple implements PersonDao {
-    List<Person> people = new ArrayList<Person>();
+    private List<Person> people = new ArrayList<Person>();
 
     @Override
     public Person findByNameAndSurname(String name, String surname) throws BizLogicException {
         Boolean checkName = (name == null) || (name.length() == 0);
         Boolean checkSurname = (surname == null) || (surname.length() == 0);
-        if(checkName && checkSurname)
+        if (checkName && checkSurname)
             throw new BizLogicException("Пустое значение имени и фамилии пользователя");
         if (checkName)
             throw new BizLogicException("Пустое значение имени пользователя");

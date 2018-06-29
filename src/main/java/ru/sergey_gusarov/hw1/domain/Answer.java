@@ -11,7 +11,6 @@ public class Answer {
     }
 
     public Answer(Integer id, String answerText, Integer score) {
-
         this.id = id;
         this.answerText = answerText;
         this.score = score;

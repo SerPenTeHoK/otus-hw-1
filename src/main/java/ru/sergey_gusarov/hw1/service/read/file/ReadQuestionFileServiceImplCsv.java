@@ -4,21 +4,24 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import ru.sergey_gusarov.hw1.domain.Answer;
 import ru.sergey_gusarov.hw1.domain.Question;
+import ru.sergey_gusarov.hw1.exception.BizLogicException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 
 public class ReadQuestionFileServiceImplCsv implements ReadQuestionFileService {
     final private int QUESTION_START_NUM = 1;
-    final private int COUNT_QUESTION_IN_FILE = 5;
 
     @Override
-    public List<Question> loadFile(String fileName) throws IOException {
+    public List<Question> loadFile(String fileName) throws IOException, BizLogicException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream("src/main/resources/app.property"));
+        Integer countQuestionInFile = Integer.valueOf(properties.getProperty("testing.question.max_count",
+                "4"));
+
         List<Question> questionList = new ArrayList<Question>();
         Reader inCsvFile;
         try {
@@ -27,7 +30,7 @@ public class ReadQuestionFileServiceImplCsv implements ReadQuestionFileService {
             Integer countQuestions = QUESTION_START_NUM;
             for (CSVRecord record : records) {
                 List<Answer> answers = new ArrayList<Answer>();
-                for (Integer i = QUESTION_START_NUM; i < COUNT_QUESTION_IN_FILE; i++) {
+                for (Integer i = QUESTION_START_NUM; i <= countQuestionInFile; i++) {
                     String colName = "Answer" + i.toString();
                     String answerStr = record.get(colName);
                     Integer score = Integer.valueOf(record.get("Score" + i.toString()));
@@ -43,6 +46,8 @@ public class ReadQuestionFileServiceImplCsv implements ReadQuestionFileService {
             throw ex;
         } catch (IOException ex) {
             throw ex;
+        } catch (IllegalStateException | IllegalArgumentException ex ) {
+            throw new BizLogicException("При чтение содержимого файла c вопросами произошла ошибка, ошибка в данных или настройках чтения", ex);
         }
         return questionList;
     }
