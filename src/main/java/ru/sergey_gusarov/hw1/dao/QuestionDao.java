@@ -7,6 +7,6 @@ import java.io.IOException;
 import java.util.List;
 
 public interface QuestionDao {
-    List<Question> getAllQuestions()
+    List<Question> findAll()
             throws IOException, BizLogicException;
 }

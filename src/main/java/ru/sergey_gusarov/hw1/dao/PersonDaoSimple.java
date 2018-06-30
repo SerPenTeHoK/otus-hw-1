@@ -12,13 +12,13 @@ public class PersonDaoSimple implements PersonDao {
 
     @Override
     public Person findByNameAndSurname(String name, String surname) throws BizLogicException {
-        Boolean checkName = (name == null) || (name.length() == 0);
-        Boolean checkSurname = (surname == null) || (surname.length() == 0);
+        Boolean checkName = name == null || name.trim().isEmpty();
+        Boolean checkSurname = surname == null || surname.trim().isEmpty();
         if (checkName && checkSurname)
             throw new BizLogicException("Пустое значение имени и фамилии пользователя");
-        if (checkName)
+        else if (checkName)
             throw new BizLogicException("Пустое значение имени пользователя");
-        if (checkSurname)
+        else if (checkSurname)
             throw new BizLogicException("Пустое значение фамилии пользователя");
         Person person;
         try {

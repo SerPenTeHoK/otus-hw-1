@@ -13,10 +13,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TestingServiceImplFile implements TestingService {
+
     private final String ANSWER_SEPARATOR_SYMBOL = ",";
     private final String HOW_TYPE_ANSWER = "Введите номер ответа. Если несколько, то через запятую, например, 2,3 : ";
 
     private InputStream inputStream = System.in;
+
 
     public void setInputStream(InputStream inputStream) throws BizLogicException {
         if (inputStream == null)
@@ -81,11 +83,10 @@ public class TestingServiceImplFile implements TestingService {
             }
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
-            throw new BizLogicException("Не удалось распознать, что вы ввели.");
-        }
-        catch (IndexOutOfBoundsException ex){
+            throw new BizLogicException("Не удалось распознать, что вы ввели: \"" + answerStr + "\"");
+        } catch (IndexOutOfBoundsException ex) {
             ex.printStackTrace();
-            throw new BizLogicException("Вы ввели значение выходящее за диапазон возможных ответов.");
+            throw new BizLogicException("Вы ввели значение выходящее за диапазон возможных ответов : \"" + answerStr.trim() + "\"");
         }
         return new Question(question.getId(), question.getCheckScore(), resultAnswers);
     }

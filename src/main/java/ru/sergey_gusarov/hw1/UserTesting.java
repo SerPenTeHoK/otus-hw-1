@@ -1,5 +1,7 @@
 package ru.sergey_gusarov.hw1;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.sergey_gusarov.hw1.dao.QuestionDao;
 import ru.sergey_gusarov.hw1.domain.Person;
@@ -15,6 +17,8 @@ import java.util.List;
 
 
 public class UserTesting {
+    private static Logger log = LoggerFactory.getLogger(UserTesting.class);
+
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/spring-context.xml");
 
@@ -24,20 +28,22 @@ public class UserTesting {
         ShowResutlsService showResutlsService = context.getBean(ShowResutlsService.class);
 
         try {
-            List<Question> questions = questionDao.getAllQuestions();
             Person interviewee = loginService.getUser();
+            List<Question> questions = questionDao.findAll();
             IntervieweeResultBase intervieweeResult = testingService.startTest(questions, interviewee);
             showResutlsService.showTestingResult(intervieweeResult);
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.err.println("\nТестирование перервано обратитесь к разработчику, скопировав все текст ошибки");
+            System.err.println("\nТестирование перервано обратитесь к разработчику, скопировав весь текст ошибки.");
+            log.error("Real error", ex);
             return;
         } catch (BizLogicException ex) {
             ex.printStackTrace();
             ex.printMessage();
+            log.error("Logic error", ex);
             return;
         }
 
-        System.out.println("\nТестирование окончено");
+        System.out.println("\nТестирование окончено.");
     }
 }

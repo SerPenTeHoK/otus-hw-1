@@ -6,4 +6,5 @@ public class IntervieweeResultSimple extends IntervieweeResultBase {
     public IntervieweeResultSimple(Person person) {
         super(person);
     }
+    // Добавить время тестирования
 }

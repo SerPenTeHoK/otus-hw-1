@@ -1,0 +1,46 @@
+13:57:27,947  INFO main ClassPathXmlApplicationContext:prepareRefresh:590 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@2d8f65a4: startup date [Sat Jun 30 13:57:27 AST 2018]; root of context hierarchy
+13:57:27,996  INFO main XmlBeanDefinitionReader:loadBeanDefinitions:316 - Loading XML bean definitions from class path resource [spring-context.xml]
+13:57:31,379 ERROR main UserTesting:main:43 - Logic error
+ru.sergey_gusarov.hw1.exception.BizLogicException: Пустое значение имени и фамилии пользователя
+	at ru.sergey_gusarov.hw1.dao.PersonDaoSimple.findByNameAndSurname(PersonDaoSimple.java:18)
+	at ru.sergey_gusarov.hw1.service.user.PersonServiceImpl.getByNameAndSurname(PersonServiceImpl.java:15)
+	at ru.sergey_gusarov.hw1.service.user.login.LoginServiceImplShell.getUser(LoginServiceImplShell.java:37)
+	at ru.sergey_gusarov.hw1.UserTesting.main(UserTesting.java:31)
+2018-06-30 13:58:45  INFO main ClassPathXmlApplicationContext:prepareRefresh:590 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@bd8db5a: startup date [Sat Jun 30 13:58:45 AST 2018]; root of context hierarchy
+2018-06-30 13:58:45  INFO main XmlBeanDefinitionReader:loadBeanDefinitions:316 - Loading XML bean definitions from class path resource [spring-context.xml]
+2018-06-30 13:58:47 ERROR main UserTesting:main:43 - Logic error
+ru.sergey_gusarov.hw1.exception.BizLogicException: Пустое значение имени и фамилии пользователя
+	at ru.sergey_gusarov.hw1.dao.PersonDaoSimple.findByNameAndSurname(PersonDaoSimple.java:18)
+	at ru.sergey_gusarov.hw1.service.user.PersonServiceImpl.getByNameAndSurname(PersonServiceImpl.java:15)
+	at ru.sergey_gusarov.hw1.service.user.login.LoginServiceImplShell.getUser(LoginServiceImplShell.java:37)
+	at ru.sergey_gusarov.hw1.UserTesting.main(UserTesting.java:31)
+2018-06-30 14:04:37  INFO main ClassPathXmlApplicationContext:prepareRefresh:590 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@bd8db5a: startup date [Sat Jun 30 14:04:37 AST 2018]; root of context hierarchy
+2018-06-30 14:04:37  INFO main XmlBeanDefinitionReader:loadBeanDefinitions:316 - Loading XML bean definitions from class path resource [spring-context.xml]
+2018-06-30 14:04:41 ERROR main UserTesting:main:38 - Real error
+java.io.FileNotFoundException: D:\MailCloud\Sergey_fotos\%d0%be%d0%b1%d1%83%d1%87%d0%b5%d0%bd%d0%b8%d0%b5\Otus\JavaSpring2018\hw1\otus-hw-1\target\classes\app.property (Системе не удается найти указанный путь)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at ru.sergey_gusarov.hw1.dao.QuestionDaoFileSource.findAll(QuestionDaoFileSource.java:23)
+	at ru.sergey_gusarov.hw1.UserTesting.main(UserTesting.java:32)
+2018-06-30 14:11:12  INFO main ClassPathXmlApplicationContext:prepareRefresh:590 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@bd8db5a: startup date [Sat Jun 30 14:11:12 AST 2018]; root of context hierarchy
+2018-06-30 14:11:12  INFO main XmlBeanDefinitionReader:loadBeanDefinitions:316 - Loading XML bean definitions from class path resource [spring-context.xml]
+2018-06-30 14:12:10  INFO main ClassPathXmlApplicationContext:prepareRefresh:590 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@bd8db5a: startup date [Sat Jun 30 14:12:10 AST 2018]; root of context hierarchy
+2018-06-30 14:12:10  INFO main XmlBeanDefinitionReader:loadBeanDefinitions:316 - Loading XML bean definitions from class path resource [spring-context.xml]
+2018-06-30 14:15:41  INFO main ClassPathXmlApplicationContext:prepareRefresh:590 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@bd8db5a: startup date [Sat Jun 30 14:15:41 AST 2018]; root of context hierarchy
+2018-06-30 14:15:41  INFO main XmlBeanDefinitionReader:loadBeanDefinitions:316 - Loading XML bean definitions from class path resource [spring-context.xml]
+2018-06-30 14:15:45 ERROR main UserTesting:main:43 - Logic error
+ru.sergey_gusarov.hw1.exception.BizLogicException: Вы ввели значение выходящее за диапазон возможных ответов : "5"
+	at ru.sergey_gusarov.hw1.service.testing.TestingServiceImplFile.getParseAnswerAndSetQuestion(TestingServiceImplFile.java:89)
+	at ru.sergey_gusarov.hw1.service.testing.TestingServiceImplFile.startTest(TestingServiceImplFile.java:44)
+	at ru.sergey_gusarov.hw1.UserTesting.main(UserTesting.java:33)
+2018-06-30 14:15:49  INFO main ClassPathXmlApplicationContext:prepareRefresh:590 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@bd8db5a: startup date [Sat Jun 30 14:15:49 AST 2018]; root of context hierarchy
+2018-06-30 14:15:49  INFO main XmlBeanDefinitionReader:loadBeanDefinitions:316 - Loading XML bean definitions from class path resource [spring-context.xml]
+2018-06-30 14:15:51 ERROR main UserTesting:main:43 - Logic error
+ru.sergey_gusarov.hw1.exception.BizLogicException: Вы ввели значение выходящее за диапазон возможных ответов : "5"
+	at ru.sergey_gusarov.hw1.service.testing.TestingServiceImplFile.getParseAnswerAndSetQuestion(TestingServiceImplFile.java:89)
+	at ru.sergey_gusarov.hw1.service.testing.TestingServiceImplFile.startTest(TestingServiceImplFile.java:44)
+	at ru.sergey_gusarov.hw1.UserTesting.main(UserTesting.java:33)
+2018-06-30 14:15:56  INFO main ClassPathXmlApplicationContext:prepareRefresh:590 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@bd8db5a: startup date [Sat Jun 30 14:15:56 AST 2018]; root of context hierarchy
+2018-06-30 14:15:56  INFO main XmlBeanDefinitionReader:loadBeanDefinitions:316 - Loading XML bean definitions from class path resource [spring-context.xml]

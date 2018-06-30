@@ -1,5 +1,6 @@
 package ru.sergey_gusarov.hw1.dao;
 
+import org.junit.jupiter.api.DisplayName;
 import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
 
@@ -10,6 +11,7 @@ class PersonDaoSimpleTest {
     private final String PERSON_SURNAME = "Surname1";
 
     @org.junit.jupiter.api.Test
+    @DisplayName("Поиск пользователя по фамилии и имени")
     void findByNameAndSurname() {
         PersonDaoSimple personDaoSimple = new PersonDaoSimple();
 
@@ -19,7 +21,7 @@ class PersonDaoSimpleTest {
         assertEquals("Пустое значение имени и фамилии пользователя", exceptionNameAndSurname.getMessage());
 
         Throwable exceptionName = assertThrows(BizLogicException.class, () ->
-            personDaoSimple.findByNameAndSurname("", PERSON_SURNAME)
+                personDaoSimple.findByNameAndSurname("", PERSON_SURNAME)
         );
         assertEquals("Пустое значение имени пользователя", exceptionName.getMessage());
 
@@ -33,7 +35,7 @@ class PersonDaoSimpleTest {
             firstPerson = personDaoSimple.findByNameAndSurname(PERSON_NAME, PERSON_SURNAME);
         } catch (BizLogicException e) {
             e.printStackTrace();
-            assertFalse(true);
+            assertFalse(true, "Не удалось создать firstPerson");
         }
         assertEquals(PERSON_NAME, firstPerson.getName());
         assertEquals(PERSON_SURNAME, firstPerson.getSurname());
@@ -42,7 +44,7 @@ class PersonDaoSimpleTest {
             newTryFirstPerson = personDaoSimple.findByNameAndSurname(PERSON_NAME, PERSON_SURNAME);
         } catch (BizLogicException e) {
             e.printStackTrace();
-            assertFalse(true);
+            assertFalse(true, "Не удалось создать newTryFirstPerson");
         }
         assertEquals(PERSON_NAME, newTryFirstPerson.getName());
         assertEquals(PERSON_SURNAME, newTryFirstPerson.getSurname());
@@ -52,7 +54,7 @@ class PersonDaoSimpleTest {
             secondPerson = personDaoSimple.findByNameAndSurname("Name2", "Surname2");
         } catch (BizLogicException e) {
             e.printStackTrace();
-            assertFalse(true);
+            assertFalse(true, "Не удалось создать secondPerson");
         }
         assertEquals("Name2", secondPerson.getName());
         assertEquals("Surname2", secondPerson.getSurname());

@@ -4,8 +4,10 @@ import ru.sergey_gusarov.hw1.domain.Question;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
 import ru.sergey_gusarov.hw1.service.read.file.ReadQuestionFileService;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,7 +19,7 @@ public class QuestionDaoFileSource implements QuestionDao {
     }
 
     @Override
-    public List<Question> getAllQuestions() throws IOException, BizLogicException {
+    public List<Question> findAll() throws IOException, BizLogicException {
         Properties properties = new Properties();
         properties.load(new FileInputStream("src/main/resources/app.property"));
         String questionsFileName = properties.getProperty("testing.question.file",
