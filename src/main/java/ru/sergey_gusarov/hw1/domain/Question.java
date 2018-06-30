@@ -3,13 +3,13 @@ package ru.sergey_gusarov.hw1.domain;
 import java.util.List;
 
 public class Question {
-    private Integer id;
-    private Integer ordinalNum;
+    private int id;
+    private int ordinalNum;
     private String questionText;
-    private Integer checkScore;
+    private int checkScore;
     private List<Answer> answers;
 
-    public Question(Integer id, Integer ordinalNum, String questionText, Integer checkScore, List<Answer> answers) {
+    public Question(int id, int ordinalNum, String questionText, int checkScore, List<Answer> answers) {
         this.id = id;
         this.ordinalNum = ordinalNum;
         this.questionText = questionText;
@@ -17,7 +17,7 @@ public class Question {
         this.answers = answers;
     }
 
-    public Question(Integer ordinalNum, String questionText, Integer checkScore, List<Answer> answers) {
+    public Question(int ordinalNum, String questionText, int checkScore, List<Answer> answers) {
         this.id = -1;
         this.ordinalNum = ordinalNum;
         this.questionText = questionText;
@@ -25,38 +25,38 @@ public class Question {
         this.answers = answers;
     }
 
-    public Question(Integer id, Integer checkScore, List<Answer> answers) {
+    public Question(int id, int checkScore, List<Answer> answers) {
         this.id = id;
         this.checkScore = checkScore;
         this.answers = answers;
     }
 
-    public Question(Integer id, List<Answer> answers) {
+    public Question(int id, List<Answer> answers) {
         this.id = id;
         this.answers = answers;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getCheckScore() {
+    public int getCheckScore() {
         return checkScore;
     }
 
-    public void setCheckScore(Integer checkScore) {
+    public void setCheckScore(int checkScore) {
         this.checkScore = checkScore;
     }
 
-    public Integer getOrdinalNum() {
+    public int getOrdinalNum() {
         return ordinalNum;
     }
 
-    public void setOrdinalNum(Integer ordinalNum) {
+    public void setOrdinalNum(int ordinalNum) {
         this.ordinalNum = ordinalNum;
     }
 

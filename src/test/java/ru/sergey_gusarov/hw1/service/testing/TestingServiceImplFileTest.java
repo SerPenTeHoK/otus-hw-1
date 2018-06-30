@@ -2,11 +2,12 @@ package ru.sergey_gusarov.hw1.service.testing;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.sergey_gusarov.hw1.dao.QuestionDaoSourceFileCsv;
 import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.domain.Question;
 import ru.sergey_gusarov.hw1.domain.results.IntervieweeResultBase;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
-import ru.sergey_gusarov.hw1.service.read.file.ReadQuestionFileServiceImplCsv;
+import ru.sergey_gusarov.hw1.exception.DaoException;
 import ru.sergey_gusarov.hw1.util.ResultCheckHelper;
 
 import java.io.BufferedInputStream;
@@ -17,17 +18,16 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestingServiceImplFileTest {
-    private final int CORRECT_SCORE = 7;
+    private final static int CORRECT_SCORE = 7;
 
     private List<Question> dummyQuestion() {
         List<Question> questions = null;
-        String fileName = "src/test/resources/testQuestions.csv";
-        ReadQuestionFileServiceImplCsv readQuestionFileServiceImplCsv = new ReadQuestionFileServiceImplCsv();
+        QuestionDaoSourceFileCsv questionDaoSourceFileCsv = new QuestionDaoSourceFileCsv();
         try {
-            questions = readQuestionFileServiceImplCsv.loadFile(fileName);
+            questions = questionDaoSourceFileCsv.findAll();
         } catch (IOException ex) {
             ex.printStackTrace();
-        } catch (BizLogicException ex) {
+        } catch (DaoException ex) {
             ex.printStackTrace();
         }
         return questions;
@@ -64,7 +64,7 @@ class TestingServiceImplFileTest {
     }
 
     @Test
-    @DisplayName("Тестирование по успешному пути и тестирование не пройдо")
+    @DisplayName("Тестирование по успешному пути и тестирование не пройдено")
     void startTestFailResult() {
         Person person = new Person("Name1", "Surname1");
         List<Question> questions = dummyQuestion();

@@ -1,5 +1,6 @@
 package ru.sergey_gusarov.hw1.service.user.login;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.sergey_gusarov.hw1.dao.PersonDao;
 import ru.sergey_gusarov.hw1.dao.PersonDaoSimple;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginServiceImplShellTest {
 
     @Test
+    @DisplayName("Получение пользователя")
     void getUser() {
         PersonDao personDaoSimple = new PersonDaoSimple();
         PersonService personService = new PersonServiceImpl();
@@ -27,7 +29,7 @@ class LoginServiceImplShellTest {
         Throwable trySetNullForInputStream = assertThrows(BizLogicException.class, () ->
                 loginServiceImplShell.setInputStream(null)
         );
-        assertEquals("Передан пустоей поток!", trySetNullForInputStream.getMessage(), "Обратботка передачи пустого потока ввода");
+        assertEquals("Передан пустой поток!", trySetNullForInputStream.getMessage(), "Обратботка передачи пустого потока ввода");
 
         String text = "Name1\nSurname1";
         byte[] buffer = text.getBytes();

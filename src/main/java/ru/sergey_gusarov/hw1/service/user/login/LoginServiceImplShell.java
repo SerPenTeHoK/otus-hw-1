@@ -19,7 +19,7 @@ public class LoginServiceImplShell implements LoginService {
 
     public void setInputStream(InputStream inputStream) throws BizLogicException {
         if (inputStream == null)
-            throw new BizLogicException("Передан пустоей поток!");
+            throw new BizLogicException("Передан пустой поток!");
         this.inputStream = inputStream;
     }
 

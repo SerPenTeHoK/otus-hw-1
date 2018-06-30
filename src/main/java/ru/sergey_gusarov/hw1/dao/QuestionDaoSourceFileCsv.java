@@ -1,22 +1,33 @@
-package ru.sergey_gusarov.hw1.service.read.file;
+package ru.sergey_gusarov.hw1.dao;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import ru.sergey_gusarov.hw1.domain.Answer;
 import ru.sergey_gusarov.hw1.domain.Question;
-import ru.sergey_gusarov.hw1.exception.BizLogicException;
+import ru.sergey_gusarov.hw1.exception.DaoException;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-
-public class ReadQuestionFileServiceImplCsv implements ReadQuestionFileService {
-    final private int QUESTION_START_NUM = 1;
+public class QuestionDaoSourceFileCsv implements QuestionDao {
+    private final static int QUESTION_START_NUM = 1;
 
     @Override
-    public List<Question> loadFile(String fileName) throws IOException, BizLogicException {
+    public List<Question> findAll() throws IOException, DaoException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream("src/main/resources/app.property"));
+        String questionsFileName = properties.getProperty("testing.question.file",
+                "src/main/resources/testQuestions.csv");
+        if (questionsFileName != null)
+            return loadFile(questionsFileName);
+        else
+            throw new DaoException("Не указан файл из которого необходимо прочитать вопросы");
+
+    }
+
+    private List<Question> loadFile(String fileName) throws IOException, DaoException {
         Properties properties = new Properties();
         properties.load(new FileInputStream("src/main/resources/app.property"));
         Integer countQuestionInFile = Integer.valueOf(properties.getProperty("testing.question.max_count",
@@ -47,7 +58,7 @@ public class ReadQuestionFileServiceImplCsv implements ReadQuestionFileService {
         } catch (IOException ex) {
             throw ex;
         } catch (IllegalStateException | IllegalArgumentException ex ) {
-            throw new BizLogicException("При чтение содержимого файла c вопросами произошла ошибка, ошибка в данных или настройках чтения", ex);
+            throw new DaoException("При чтение содержимого файла c вопросами произошла ошибка, ошибка в данных или настройках чтения", ex);
         }
         return questionList;
     }

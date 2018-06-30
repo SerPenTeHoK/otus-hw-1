@@ -1,16 +1,17 @@
 package ru.sergey_gusarov.hw1.dao;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonDaoSimpleTest {
-    private final String PERSON_NAME = "Name1";
-    private final String PERSON_SURNAME = "Surname1";
+    private final static String PERSON_NAME = "Name1";
+    private final static String PERSON_SURNAME = "Surname1";
 
-    @org.junit.jupiter.api.Test
+    @Test
     @DisplayName("Поиск пользователя по фамилии и имени")
     void findByNameAndSurname() {
         PersonDaoSimple personDaoSimple = new PersonDaoSimple();

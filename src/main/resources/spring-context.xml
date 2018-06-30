@@ -4,8 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="personDao" class="ru.sergey_gusarov.hw1.dao.PersonDaoSimple">
-    </bean>
+    <bean id="personDao" class="ru.sergey_gusarov.hw1.dao.PersonDaoSimple"/>
 
     <!-- Для тренировки-->
     <bean id="personService" class="ru.sergey_gusarov.hw1.service.user.PersonServiceImpl">
@@ -16,20 +15,11 @@
         <constructor-arg index="0" ref="personService"/>
     </bean>
 
-    <bean id="readQuestionFileService"
-          class="ru.sergey_gusarov.hw1.service.read.file.ReadQuestionFileServiceImplCsv">
-    </bean>
+    <bean id="questionDaoFileSource" class="ru.sergey_gusarov.hw1.dao.QuestionDaoSourceFileCsv"/>
 
-    <bean id="questionDaoFileSource" class="ru.sergey_gusarov.hw1.dao.QuestionDaoFileSource">
-        <constructor-arg index="0" ref="readQuestionFileService"/>
-    </bean>
+    <bean id="testingService" class="ru.sergey_gusarov.hw1.service.testing.TestingServiceImplFile"/>
 
-    <bean id="testingService"
-          class="ru.sergey_gusarov.hw1.service.testing.TestingServiceImplFile">
-    </bean>
-
-    <bean id="showResultsService" class="ru.sergey_gusarov.hw1.service.testing.results.ShowResultsServiceImplShell">
-    </bean>
+    <bean id="showResultsService" class="ru.sergey_gusarov.hw1.service.testing.results.ShowResultsServiceImplShell"/>
 
 </beans>
 
