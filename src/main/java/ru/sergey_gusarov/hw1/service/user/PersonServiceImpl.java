@@ -7,7 +7,7 @@ import ru.sergey_gusarov.hw1.exception.BizLogicException;
 public class PersonServiceImpl implements PersonService {
     private PersonRepository dao;
 
-    public void setDao(PersonRepository dao) {
+    public PersonServiceImpl(PersonRepository dao) {
         this.dao = dao;
     }
 

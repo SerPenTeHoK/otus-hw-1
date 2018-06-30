@@ -21,9 +21,7 @@ class LoginServiceImplShellTest {
     @DisplayName("Получение пользователя")
     void getUser() {
         PersonRepository personRepositorySimple = new PersonRepositorySimple();
-        PersonService personService = new PersonServiceImpl();
-        // Через сеттер, чтобы посмотреть как это всё будет выглядить
-        ((PersonServiceImpl) personService).setDao(personRepositorySimple);
+        PersonService personService = new PersonServiceImpl(personRepositorySimple);
         LoginServiceImplShell loginServiceImplShell = new LoginServiceImplShell(personService);
 
         Throwable trySetNullForInputStream = assertThrows(BizLogicException.class, () ->

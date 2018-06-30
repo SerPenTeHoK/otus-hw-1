@@ -6,9 +6,8 @@
 
     <bean id="personDao" class="ru.sergey_gusarov.hw1.repository.PersonRepositorySimple"/>
 
-    <!-- Для тренировки-->
     <bean id="personService" class="ru.sergey_gusarov.hw1.service.user.PersonServiceImpl">
-        <property name="dao" ref="personDao"/>
+        <constructor-arg index="0" ref="personDao"/>
     </bean>
 
     <bean id="loginService" class="ru.sergey_gusarov.hw1.service.user.login.LoginServiceImplShell">

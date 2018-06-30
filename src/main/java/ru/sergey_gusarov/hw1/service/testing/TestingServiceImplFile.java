@@ -19,7 +19,6 @@ public class TestingServiceImplFile implements TestingService {
 
     private InputStream inputStream = System.in;
 
-
     public void setInputStream(InputStream inputStream) throws BizLogicException {
         if (inputStream == null)
             throw new BizLogicException("Передан пустоей поток!");
