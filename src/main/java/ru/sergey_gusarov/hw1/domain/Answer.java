@@ -1,23 +1,22 @@
 package ru.sergey_gusarov.hw1.domain;
 
 public class Answer {
-    private Integer id;
+    private int id;
     private String answerText;
-    private Integer score;
+    private int score;
 
-    public Answer(Integer id, Integer score) {
+    public Answer(int id, int score) {
         this.id = id;
         this.score = score;
     }
 
-    public Answer(Integer id, String answerText, Integer score) {
+    public Answer(int id, String answerText, int score) {
         this.id = id;
         this.answerText = answerText;
         this.score = score;
     }
 
-    public Answer(String answerText, Integer score) {
-
+    public Answer(String answerText, int score) {
         this.answerText = answerText;
         this.score = score;
     }
@@ -30,19 +29,11 @@ public class Answer {
         this.answerText = answerText;
     }
 
-    public Integer getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(int score) {
         this.score = score;
-    }
-
-    @Override
-    public String toString() {
-        return "Answer{" +
-                "answerText='" + answerText + '\'' +
-                ", score=" + score +
-                '}';
     }
 }

@@ -1,4 +1,4 @@
-package ru.sergey_gusarov.hw1.dao;
+package ru.sergey_gusarov.hw1.repository;
 
 import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class PersonDaoSimple implements PersonDao {
+public class PersonRepositorySimple implements PersonRepository {
     private List<Person> people = new ArrayList<Person>();
 
     @Override

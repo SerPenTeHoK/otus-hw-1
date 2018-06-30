@@ -1,4 +1,4 @@
-package ru.sergey_gusarov.hw1.dao;
+package ru.sergey_gusarov.hw1.repository;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,14 +7,14 @@ import ru.sergey_gusarov.hw1.exception.BizLogicException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PersonDaoSimpleTest {
+class PersonRepositorySimpleTest {
     private final static String PERSON_NAME = "Name1";
     private final static String PERSON_SURNAME = "Surname1";
 
     @Test
     @DisplayName("Поиск пользователя по фамилии и имени")
     void findByNameAndSurname() {
-        PersonDaoSimple personDaoSimple = new PersonDaoSimple();
+        PersonRepositorySimple personDaoSimple = new PersonRepositorySimple();
 
         Throwable exceptionNameAndSurname = assertThrows(BizLogicException.class, () ->
                 personDaoSimple.findByNameAndSurname("", "")

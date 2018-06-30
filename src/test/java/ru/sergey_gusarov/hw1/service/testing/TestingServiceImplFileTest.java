@@ -2,12 +2,11 @@ package ru.sergey_gusarov.hw1.service.testing;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.sergey_gusarov.hw1.dao.QuestionDaoSourceFileCsv;
+import ru.sergey_gusarov.hw1.repository.QuestionRepositorySourceFileCsv;
 import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.domain.Question;
 import ru.sergey_gusarov.hw1.domain.results.IntervieweeResultBase;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
-import ru.sergey_gusarov.hw1.exception.DaoException;
 import ru.sergey_gusarov.hw1.util.ResultCheckHelper;
 
 import java.io.BufferedInputStream;
@@ -22,12 +21,12 @@ class TestingServiceImplFileTest {
 
     private List<Question> dummyQuestion() {
         List<Question> questions = null;
-        QuestionDaoSourceFileCsv questionDaoSourceFileCsv = new QuestionDaoSourceFileCsv();
+        QuestionRepositorySourceFileCsv questionDaoSourceFileCsv = new QuestionRepositorySourceFileCsv();
         try {
             questions = questionDaoSourceFileCsv.findAll();
         } catch (IOException ex) {
             ex.printStackTrace();
-        } catch (DaoException ex) {
+        } catch (BizLogicException ex) {
             ex.printStackTrace();
         }
         return questions;

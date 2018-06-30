@@ -1,28 +1,28 @@
-package ru.sergey_gusarov.hw1.dao;
+package ru.sergey_gusarov.hw1.repository;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.sergey_gusarov.hw1.domain.Question;
-import ru.sergey_gusarov.hw1.exception.DaoException;
+import ru.sergey_gusarov.hw1.exception.BizLogicException;
 
 import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class QuestionDaoSourceFileCsvTest {
+class QuestionRepositorySourceFileCsvTest {
 
     @Test
     @DisplayName("Получение вопросов")
     void findAll() {
-        QuestionDaoSourceFileCsv questionDaoSourceFileCsv = new QuestionDaoSourceFileCsv();
+        QuestionRepositorySourceFileCsv questionDaoSourceFileCsv = new QuestionRepositorySourceFileCsv();
         List<Question> questions = null;
         try {
             questions = questionDaoSourceFileCsv.findAll();
         } catch (IOException ex) {
             ex.printStackTrace();
             assertTrue(false, "IOException");
-        } catch (DaoException ex) {
+        } catch (BizLogicException ex) {
             ex.printStackTrace();
             assertTrue(false, "BizLogicException");
         }

@@ -2,8 +2,8 @@ package ru.sergey_gusarov.hw1.service.user.login;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.sergey_gusarov.hw1.dao.PersonDao;
-import ru.sergey_gusarov.hw1.dao.PersonDaoSimple;
+import ru.sergey_gusarov.hw1.repository.PersonRepository;
+import ru.sergey_gusarov.hw1.repository.PersonRepositorySimple;
 import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
 import ru.sergey_gusarov.hw1.service.user.PersonService;
@@ -20,10 +20,10 @@ class LoginServiceImplShellTest {
     @Test
     @DisplayName("Получение пользователя")
     void getUser() {
-        PersonDao personDaoSimple = new PersonDaoSimple();
+        PersonRepository personRepositorySimple = new PersonRepositorySimple();
         PersonService personService = new PersonServiceImpl();
         // Через сеттер, чтобы посмотреть как это всё будет выглядить
-        ((PersonServiceImpl) personService).setDao(personDaoSimple);
+        ((PersonServiceImpl) personService).setDao(personRepositorySimple);
         LoginServiceImplShell loginServiceImplShell = new LoginServiceImplShell(personService);
 
         Throwable trySetNullForInputStream = assertThrows(BizLogicException.class, () ->

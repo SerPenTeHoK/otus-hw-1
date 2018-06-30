@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="personDao" class="ru.sergey_gusarov.hw1.dao.PersonDaoSimple"/>
+    <bean id="personDao" class="ru.sergey_gusarov.hw1.repository.PersonRepositorySimple"/>
 
     <!-- Для тренировки-->
     <bean id="personService" class="ru.sergey_gusarov.hw1.service.user.PersonServiceImpl">
@@ -15,7 +15,7 @@
         <constructor-arg index="0" ref="personService"/>
     </bean>
 
-    <bean id="questionDaoFileSource" class="ru.sergey_gusarov.hw1.dao.QuestionDaoSourceFileCsv"/>
+    <bean id="questionDaoFileSource" class="ru.sergey_gusarov.hw1.repository.QuestionRepositorySourceFileCsv"/>
 
     <bean id="testingService" class="ru.sergey_gusarov.hw1.service.testing.TestingServiceImplFile"/>
 

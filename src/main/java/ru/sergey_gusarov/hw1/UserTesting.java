@@ -3,12 +3,11 @@ package ru.sergey_gusarov.hw1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.sergey_gusarov.hw1.dao.QuestionDao;
+import ru.sergey_gusarov.hw1.repository.QuestionRepository;
 import ru.sergey_gusarov.hw1.domain.Person;
 import ru.sergey_gusarov.hw1.domain.Question;
 import ru.sergey_gusarov.hw1.domain.results.IntervieweeResultBase;
 import ru.sergey_gusarov.hw1.exception.BizLogicException;
-import ru.sergey_gusarov.hw1.exception.DaoException;
 import ru.sergey_gusarov.hw1.service.testing.TestingService;
 import ru.sergey_gusarov.hw1.service.testing.results.ShowResutlsService;
 import ru.sergey_gusarov.hw1.service.user.login.LoginService;
@@ -26,7 +25,7 @@ public class UserTesting {
         log.debug("finish load spring contex");
 
         log.debug("Try get beans");
-        QuestionDao questionDao = context.getBean(QuestionDao.class);
+        QuestionRepository questionRepository = context.getBean(QuestionRepository.class);
         LoginService loginService = context.getBean(LoginService.class);
         TestingService testingService = context.getBean(TestingService.class);
         ShowResutlsService showResutlsService = context.getBean(ShowResutlsService.class);
@@ -34,7 +33,7 @@ public class UserTesting {
 
         try {
             Person interviewee = loginService.getUser();
-            List<Question> questions = questionDao.findAll();
+            List<Question> questions = questionRepository.findAll();
             IntervieweeResultBase intervieweeResult = testingService.startTest(questions, interviewee);
             showResutlsService.showTestingResult(intervieweeResult);
         } catch (IOException ex) {
@@ -47,12 +46,7 @@ public class UserTesting {
             ex.printMessage();
             log.error("Logic error", ex);
             return;
-        } catch (DaoException ex) {
-            ex.printStackTrace();
-            log.error("Dao error", ex);
-            return;
         }
-
         System.out.println("\nТестирование окончено.");
     }
 }
