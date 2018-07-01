@@ -36,7 +36,7 @@ class LoginServiceImplShellTest {
 
         assertDoesNotThrow(() ->
                         loginServiceImplShell.setInputStream(bis1)
-                , "Установка тестового потока ввода прошла успешно");
+                , "Установка тестового потока ввода прошла не успешно");
 
         AtomicReference<Person> atomicReference = new AtomicReference<Person>();
         assertDoesNotThrow(() -> {
@@ -51,14 +51,14 @@ class LoginServiceImplShellTest {
         BufferedInputStream bis2 = new BufferedInputStream(in2);
         assertDoesNotThrow(() ->
                         loginServiceImplShell.setInputStream(bis2)
-                , "Установка тестового потока ввода прошла успешно");
+                , "Установка тестового потока ввода прошла не успешно");
         //Повторный вызов пользователя
         assertDoesNotThrow(() -> {
                     Person person = loginServiceImplShell.getUser();
                     atomicReference.set(person);
                 }
-                , "Пользователь поднят успешно");
+                , "Пользователь поднят не успешно");
         Person secondTryGetPerson = atomicReference.get();
-        assertEquals(firstTryGetPerson, secondTryGetPerson, "Одина и таже персона");
+        assertEquals(firstTryGetPerson, secondTryGetPerson, "Не одна и таже персона");
     }
 }

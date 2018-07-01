@@ -29,7 +29,7 @@ public class UserTesting {
         LoginService loginService = context.getBean(LoginService.class);
         TestingService testingService = context.getBean(TestingService.class);
         ShowResutlsService showResutlsService = context.getBean(ShowResutlsService.class);
-        log.debug("End geting beans");
+        log.debug("End getting beans");
 
         try {
             Person interviewee = loginService.getUser();

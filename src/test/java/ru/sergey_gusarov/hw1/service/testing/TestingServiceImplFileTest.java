@@ -56,7 +56,8 @@ class TestingServiceImplFileTest {
         assertEquals("Name1 Surname1", intervieweeResult.getPerson().getFullName());
         try {
             assertTrue(ResultCheckHelper.isTestPass(intervieweeResult.getQuestions()), "Тестирование пройдено");
-            assertTrue(ResultCheckHelper.getSumScore(intervieweeResult.getQuestions()) == CORRECT_SCORE, "Набрано правильное количество баллов");
+            assertTrue(ResultCheckHelper.getSumScore(intervieweeResult.getQuestions()) == CORRECT_SCORE,
+                    "Набрано правильное количество баллов");
         } catch (BizLogicException e) {
             e.printStackTrace();
         }
@@ -86,7 +87,8 @@ class TestingServiceImplFileTest {
         assertEquals("Name1 Surname1", intervieweeResult.getPerson().getFullName());
         try {
             assertFalse(ResultCheckHelper.isTestPass(intervieweeResult.getQuestions()), "Тестирование пройдено");
-            assertTrue(ResultCheckHelper.getSumScore(intervieweeResult.getQuestions()) < CORRECT_SCORE, "Набрано меньше правильного количество баллов");
+            assertTrue(ResultCheckHelper.getSumScore(intervieweeResult.getQuestions()) < CORRECT_SCORE,
+                    "Набрано меньше правильного количество баллов");
         } catch (BizLogicException e) {
             e.printStackTrace();
         }
